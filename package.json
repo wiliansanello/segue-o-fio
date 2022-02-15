@@ -1,0 +1,31 @@
+{
+  "name": "segue-o-fio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/github.com/wiliansanello.git"
+  },
+  "author": "Wilian Ansanello",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/github.com/wiliansanello/issues"
+  },
+  "homepage": "https://github.com/github.com/wiliansanello#readme",
+  "dependencies": {
+    "next": "^12.0.10",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^7.26.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.2",
+    "postcss": "^8.4.6",
+    "prettier": "2.5.1",
+    "tailwindcss": "^3.0.21"
+  }
+}
