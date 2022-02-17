@@ -4,7 +4,7 @@ import Footer from '../Footer'
 
 const Layout = ({ children }) => {
   return (
-    <body className='bg-blue-800'>
+    <body className='bg-blue-900'>
       <div>
         <Header />
         <div>
