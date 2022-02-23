@@ -5,10 +5,10 @@ const Index = () => {
   const { register, watch } = useForm()
   const content = watch('content')
 
-  const tweets = content.split('\n\n\n')
+  const tweets = content?.split('\n\n\n')
 
   return (
-    <>
+    <div className='max-w-6xl m-auto'>
       <div className='flex flex-row p-6'>
         <div className='flex-1 p-2'>
           <h2>Conteúdo: </h2>
@@ -16,11 +16,11 @@ const Index = () => {
         </div>
         <div className='flex-1 p-2'>
           <h2>Tweets: </h2>
-          {tweets.map(tweet => (<Tweet tweet={tweet} />
+          {content && tweets.map(tweet => (<Tweet tweet={tweet} />
           ))}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
