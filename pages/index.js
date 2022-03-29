@@ -3,12 +3,15 @@ import Tweet from '../components/Tweet'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { BiShareAlt } from 'react-icons/bi'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Index = () => {
   const router = useRouter()
   const { register, watch, setValue } = useForm()
   const content = watch('content')
   const showCounter = watch('showCounter') || false
+  const separator = watch('separator') || '/'
 
   useEffect(() => {
     if (router?.query?.content) {
@@ -27,26 +30,41 @@ const Index = () => {
   const share = async () => {
     const shareUrl = process.env.NEXT_PUBLIC_APP_URL + '?content=' + encodeURI(content) + '&showCounter=' + showCounter
     await navigator.clipboard.writeText(shareUrl)
+
+    toast.configure()
+    toast.info('Conteúdo copiado. Abra uma nova aba no seu navegador e cole o endereço,',
+      {
+        position: toast.POSITION.TOP_LEFT
+      })
   }
 
   return (
     <div className='max-w-6xl m-auto'>
-      <p className='px-4 py-4'>
+      <p className='px-4 py-4 text-white text-center'>
         <label>
           <input type='checkbox' {...register('showCounter')} />
-          Mostrar contador{'    '}
+          <label className='mr-2 text-white'> Mostrar contador{'    '} </label>
+        </label>
+        <label className='m-4 text-white'>
+          Separador do contador{'    '}
+          <select className='rounded-lg text-black'
+            {...register('separator')}>
+            <option value='/'>/</option>
+            <option value='-'>-</option>
+            <option value=':'>:</option>
+          </select>
         </label>
         <button
           type='button'
-          className='mx-4 py-2 px-2 text-white bg-sky-400 rounded-lg block md:inline-block'
+          className='py-2 px-2 text-white bg-sky-400 rounded-lg block md:inline-block'
           onClick={share}>
-          <BiShareAlt className='inline mr-2' />
+          <BiShareAlt className='inline mr-2 text-white' />
           Compartilhar
         </button>
       </p>
-      <div className='flex flex-row'>
-        <div className='flex-1 p-2'>
-          <h2>Conteúdo: </h2>
+      <div className='flex flex-none'>
+        <div className='flex-1 max-w-xl p-2'>
+          <h2 className='text-white'>Conteúdo: </h2>
           <textarea
             placeholder="Digite seu conteúdo do fio aqui"
             {...register('content')}
@@ -55,12 +73,13 @@ const Index = () => {
           </textarea>
         </div>
         <div className='flex-1 p-2'>
-          <h2>Tweets: </h2>
+          <h2 className='text-white'>Tweets: </h2>
           {content && tweets.map((tweet, index) => (
             <Tweet
               key={tweet + '-' + index}
               tweet={tweet}
               showCounter={showCounter}
+              separator={separator}
               current={index + 1}
               total={tweets.length}
             />
